@@ -5,8 +5,8 @@ import AddTaskInput from "./AddTaskInput";
 const Container = styled.div`
   display: flex;
   flex-direction: row;
-
   width: 80vw;
+  margin-bottom: 100px;
 
   svg {
     align-items: center;
@@ -26,7 +26,7 @@ display: flex;
 flex-direction: row;
 `
 
-const AddTask = () => {
+const AddTask = (props) => {
 const [hidden, setHidden] = useState(true)
 
 const onClickHandler = () => setHidden(!hidden)
@@ -44,7 +44,7 @@ const onClickHandler = () => setHidden(!hidden)
       <div> Add task </div>
       </HiddenAddTask>
       :
-      <AddTaskInput />
+      <AddTaskInput update={props.update} setUpdate={props.setUpdate} hidden set={setHidden} />
     }
     </Container>
   );

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useRef} from "react";
 import styled from "styled-components";
 import MainButton from "../MainButton";
 import TextAreaButtons from "./TextAreaButtons";
@@ -30,18 +30,49 @@ const TextContainer = styled.div`
     border: 1px solid #282828;
 `
 
-const AddTaskInput = () => {
+const AddTaskInput = (props) => {
+
+  const input = useRef()
+
+
+  const clickHandler = () => {
+    console.log('adding...')
+    const inputValue = input.current.value
+    const data = {
+      id: localStorage.getItem('id'),
+      todo: inputValue
+    }
+
+    try{
+      fetch("http://localhost:3002/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((res) => {
+          console.log(res)
+          props.setUpdate(!props.update)
+          input.current.value = ''
+        })
+
+    }catch(e){
+      console.log(e)
+    }
+  }
+
   return ( 
   <Container>
       <TextContainer>
-      <textarea name="" id="" cols="30" rows="10"></textarea>
+      <textarea ref={input} name="" id="" cols="30" rows="10"></textarea>
 
       <TextAreaButtons />
       </TextContainer>
 
       <ButtonsContainer>
-    <MainButton red text='Add' />
-    <MainButton  text='Cancel' />
+    <MainButton red click={clickHandler} text='Add' />
+    <MainButton hidden={props.hidden} set={props.set} text='Cancel' />
     </ButtonsContainer>
 
   </Container>

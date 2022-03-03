@@ -22,9 +22,19 @@ const MainButton = (props) => {
     cursor: pointer;
     `
 
+const clickHandler = () => {
+    if(props.set){
+        props.set(true)
+    }
+    if(props.click){
+        props.click()
+    }
+    
+}
+
     return (
         <>
-        <Button>{props.text}</Button>
+        <Button onClick={clickHandler}>{props.text}</Button>
         </>
     )
 }

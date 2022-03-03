@@ -23,8 +23,10 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
-body {
+body, html {
 	line-height: 1;
+	height:100%;
+	background-color: #1f1f1f;
 }
 ol, ul {
 	list-style: none;
@@ -40,4 +42,9 @@ q:before, q:after {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
+}
+
+a{
+	text-decoration: none;
+	color: inherit;
 }

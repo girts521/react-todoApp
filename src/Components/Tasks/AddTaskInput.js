@@ -1,10 +1,11 @@
-import React, {useRef} from "react";
+import React, {useRef, useState} from "react";
 import styled from "styled-components";
 import MainButton from "../MainButton";
 import TextAreaButtons from "./TextAreaButtons";
 
 const Container = styled.div`
   width: 100%;
+  margin-top: 50px;
 
   textarea{
     width: 98%;
@@ -34,14 +35,36 @@ const AddTaskInput = (props) => {
 
   const input = useRef()
 
+  const [projectId,setProjectId] = useState(null)
+
+  const getProjectId = (id) => {
+    // if(id){
+      console.log(id)
+      setProjectId(id)
+    // }
+  }
+
 
   const clickHandler = () => {
-    console.log('adding...')
     const inputValue = input.current.value
-    const data = {
-      id: localStorage.getItem('id'),
-      todo: inputValue
+    let project
+
+    if(props.project){
+       project = props.project
     }
+    if(projectId){
+      project = projectId
+    }else {
+       project = ''
+    }
+
+    const data = {
+      username: localStorage.getItem('name'),
+      todo: inputValue,
+      project
+    }
+
+    if(inputValue){
 
     try{
       fetch("http://localhost:3002/add", {
@@ -61,13 +84,16 @@ const AddTaskInput = (props) => {
       console.log(e)
     }
   }
+  }
+
+
 
   return ( 
   <Container>
       <TextContainer>
-      <textarea ref={input} name="" id="" cols="30" rows="10"></textarea>
+      <textarea autoFocus ref={input} name="" id="" cols="30" rows="10"></textarea>
 
-      <TextAreaButtons />
+      <TextAreaButtons getProjectId={getProjectId} />
       </TextContainer>
 
       <ButtonsContainer>

@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 const Container = styled.div`
   width: 80vw;
+  max-width: 800px;
 `;
 
 const Todo = styled.div`
@@ -31,7 +32,7 @@ const Tasks = (props) => {
     console.log(e.target.parentNode.dataset.key)
  
     const data = {
-      UID: localStorage.getItem('id'),
+      username: localStorage.getItem('name'),
       todoId: e.target.parentNode.dataset.key
     }
 

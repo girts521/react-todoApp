@@ -1,8 +1,10 @@
-import React from "react";
+import React,{useContext} from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHistory} from "@fortawesome/free-solid-svg-icons";
 import Projects from "../Projects/Projects";
+import { Link } from "react-router-dom";
+import AuthContext from "../../store/authContext";
 
 const Container = styled.div`
   width: 70%;
@@ -35,8 +37,12 @@ const Button = styled.div`
 `;
 
 const BurgerMenu = (props) => {
+
+  const authCtx = useContext(AuthContext)
+
   return (
     <Container className={props.hidden && 'hidden'} >
+      
         <Button>
         <svg width="16" height="16" viewBox="0 0 16 16">
           <g fill="#4361ee">
@@ -47,12 +53,13 @@ const BurgerMenu = (props) => {
             <path d="M10.491 2a2 2 0 011.923 1.45l1.509 5.28a2 2 0 01.077.55V12a2 2 0 01-2 2H4a2 2 0 01-2-2V9.28a2 2 0 01.077-.55l1.509-5.28A2 2 0 015.509 2h4.982zm0 1H5.51a1 1 0 00-.962.725l-1.509 5.28A1 1 0 003 9.28V12a1 1 0 001 1h8a1 1 0 001-1V9.28a1 1 0 00-.038-.275l-1.51-5.28a1 1 0 00-.96-.725zM6.25 9a.5.5 0 01.5.5 1.25 1.25 0 002.5 0 .5.5 0 01.5-.5h1.75a.5.5 0 110 1h-1.306a2.25 2.25 0 01-4.388 0H4.5a.5.5 0 010-1z"></path>
           </g>
         </svg>
-        All Tasks
+        {authCtx.isLoggedIn ? <Link to='/'>All Tasks</Link> : <Link to='/login'>All Tasks</Link> }
+      
       </Button>
 
       <Button>
       <FontAwesomeIcon color='#dd4b39' icon={faHistory} />
-      Complated tasks
+      {authCtx.isLoggedIn ? <Link to='/complated'>Complated tasks</Link> : <Link to='/login'>Complated tasks</Link> }
       </Button>
 
       <Projects />

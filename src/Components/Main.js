@@ -1,7 +1,11 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useContext} from "react";
 import styled from "styled-components";
 import Tasks from "./Tasks/Tasks";
 import AddTask from "./Tasks/AddTask";
+
+import AuthContext from "../store/authContext";
+
+
 
 const Container = styled.div`
   background-color: #1f1f1f;
@@ -24,14 +28,16 @@ const Main = (props) => {
   const [todoList, setTodo] = useState(null);
   const [update, setUpdate] = useState()
 
+  const updatectx = useContext(AuthContext)
+
   useEffect(() => {
-    console.log("fetching");
-    // setUpdate(false)
-    const id = localStorage.getItem("id");
+    const username = localStorage.getItem("name");
+
+
     const data = {
-      id: id,
+      username: username,
     };
-    try {
+
       fetch("http://localhost:3002/todo", {
         method: "POST",
         headers: {
@@ -45,15 +51,9 @@ const Main = (props) => {
           console.log(JSON.parse(json))
 
         });
-    } catch (e) {
-      console.log(e);
-    }
+    
 
-    return () => {
-      // setUpdate(!update)
-      console.log('cleanup', update)
-    }
-  }, [update]);
+  }, [update, updatectx.updateTasks]);
 
 
 

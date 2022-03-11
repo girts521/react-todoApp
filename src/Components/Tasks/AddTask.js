@@ -6,6 +6,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   width: 80vw;
+  max-width: 800px;
   margin-bottom: 100px;
 
   svg {
@@ -24,6 +25,8 @@ const HiddenAddTask = styled.div`
 width: 100%;
 display: flex;
 flex-direction: row;
+margin-top: 50px;
+cursor: pointer;
 `
 
 const AddTask = (props) => {
@@ -44,7 +47,7 @@ const onClickHandler = () => setHidden(!hidden)
       <div> Add task </div>
       </HiddenAddTask>
       :
-      <AddTaskInput update={props.update} setUpdate={props.setUpdate} hidden set={setHidden} />
+      <AddTaskInput project={props.project ? props.project : false} update={props.update} setUpdate={props.setUpdate} hidden set={setHidden} />
     }
     </Container>
   );

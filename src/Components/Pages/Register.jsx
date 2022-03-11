@@ -1,8 +1,9 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import MainButton from "../MainButton";
-import { useLocation, Navigate } from "react-router-dom";
-import useFetch from "../../useFetch";
+import { Navigate } from "react-router-dom";
+
+import AuthContext from "../../store/authContext";
 
 const Container = styled.div`
   background-color: #1f1f1f;
@@ -16,10 +17,13 @@ const Container = styled.div`
 `;
 
 const InnerContainer = styled.div`
+
+form{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
 
   input {
     height: 25px;
@@ -32,30 +36,53 @@ const InnerContainer = styled.div`
   }
 `;
 
-const Register = () => {
-  const username = useRef();
+const Error = styled.p `
+  color: red;
+  margin-top: 10px;
+`;
+
+
+const Register = (props) => {
+  const email = useRef();
   const password = useRef();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [data, setData] = useState({});
-  const location = useLocation();
-  // const data = useFetch('http://127.0.0.1:3002/')
 
-  useEffect(() => {
-    if (data.logged === true) {
-      setIsLoggedIn(true);
-    }
-  }, [data]);
+  const authCtx = useContext(AuthContext)
 
-  const clickHandler = () => {
-    const usernameValue = username.current.value;
-    const passwordValue = password.current.value;
+  const [error, setError] = useState(null)
+  const [isEmailValid, setIsEmailValid] = useState(true)
+  const [isPasswordValid, setIsPasswordValid] = useState(true)
+
+  const inputHandler = () => {
+    const regex = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
+    const value = email.current.value
+    setIsEmailValid(regex.test(value))
+  }
+
+  const passwordHandler = () => {
+    const regex = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/g)
+    const value = password.current.value
+    setIsPasswordValid(regex.test(value))
+  }
+
+  const submitHandler = (e) => {
+    e.preventDefault()
+    console.log('submit event')
+
     const user = {
-      username: username.current.value,
-      password: password.current.value
+      email: email.current.value,
+      password: password.current.value,
+      returnSecureToken: true
     }
-    console.log('user: ', user)
-    try {
-      fetch("http://localhost:3002/register", {
+    let url;
+  
+      if(props.login){
+        url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyB4-KzE9DsuUjdBb7qWqiNQsOJiQ1dIeuk'
+      }
+      if(props.register){
+        url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyB4-KzE9DsuUjdBb7qWqiNQsOJiQ1dIeuk'
+      }
+      // fetch("http://localhost:3002/register", {
+        fetch(url,{
         method: "POST",
         headers: {
           'Content-Type': 'application/json'
@@ -63,29 +90,52 @@ const Register = () => {
         body: JSON.stringify(user)
       })
         .then((response) => response.json())
-        .then((json) => {
-          const parsedJson = JSON.parse(json);
-          setData(parsedJson);
-          const name = parsedJson.username
-          const id = parsedJson.id
-          localStorage.setItem('name', name)
-          localStorage.setItem('id', id)
-        });
-    } catch (e) {
-      console.log(e);
-    }
-    // console.log(data)
-  };
+        .then((data) => {
+          if(data.error){
+            setError(true)
+          }else{
+          
+          const username = email.current.value.split("@")[0]
+          
+          authCtx.setName(username)
+          
+          localStorage.setItem('name', data.email)
+
+          const dbData = {
+            username: data.email
+          }
+          fetch("http://localhost:3002/register",{
+            method: "POST",
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dbData)
+          })
+          .then((res) => {
+            authCtx.login(data.idToken)
+          })
+
+        }})
+        .catch((e) => {
+          console.log('oops an error')
+          console.log(e)
+        })
+      }
+
+  
 
   return (
     <Container>
       <InnerContainer>
-        <h1>Register</h1>
-        <input ref={username} type="username" placeholder="Username" />
-        <input ref={password} type="password" placeholder="Password" />
+        <form onSubmit={submitHandler} action="">
+        <h1>{props.login ? 'Login' : 'Register'}</h1>
+        <input ref={email} style={!isEmailValid ? {border: '1px solid red'} : {border: 'none'}} onInput={inputHandler} type="email" placeholder="Email" />
+        <input ref={password} style={!isPasswordValid ? {border: '1px solid red'} : {border: 'none'}} onInput={passwordHandler} type="password" placeholder="Password" />
+        {error && <Error>Email or password is wrong! Please try again!</Error>}
+        <MainButton width={50}  red text={props.login ? 'Login' : 'Register'} />
+        </form>
       </InnerContainer>
-      <MainButton click={clickHandler} red text="Register" />
-      {isLoggedIn && <Navigate to="/" />}
+      {authCtx.isLoggedIn && <Navigate to="/" />}
     </Container>
   );
 };

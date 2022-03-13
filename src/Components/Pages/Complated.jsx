@@ -47,7 +47,7 @@ useEffect(() => {
         username
     }
     
-     fetch("http://52.28.57.216/completed",{
+     fetch("https://gkarcevskis-todo.herokuapp.com/completed",{
         method: "POST",
         headers: {
                   "Content-Type": "application/json",
@@ -71,7 +71,7 @@ const deleteTodo = (e) => {
       username: localStorage.getItem('name'),
       todoId: e.target.parentNode.dataset.key
     }
-      fetch("http://52.28.57.216/deleteCompleted", {
+      fetch("https://gkarcevskis-todo.herokuapp.com/deleteCompleted", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -92,7 +92,7 @@ const deleteTodo = (e) => {
         todoId: e.target.parentNode.dataset.key
       }
 
-      fetch("http://52.28.57.216/restore", {
+      fetch("https://gkarcevskis-todo.herokuapp.com/restore", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

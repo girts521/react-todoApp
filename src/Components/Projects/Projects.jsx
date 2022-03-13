@@ -38,7 +38,7 @@ const Projects = () => {
             projectName: inputValue
         }
 
-        fetch("http://52.28.57.216/projectAdd", {
+        fetch("https://gkarcevskis-todo.herokuapp.com/projectAdd", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -63,7 +63,7 @@ const Projects = () => {
             username
         }
 
-        fetch("http://52.28.57.216/projects", {
+        fetch("https://gkarcevskis-todo.herokuapp.com/projects", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

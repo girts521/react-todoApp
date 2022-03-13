@@ -104,7 +104,7 @@ const Register = (props) => {
           const dbData = {
             username: data.email
           }
-          fetch("http://52.28.57.216/register",{
+          fetch("https://gkarcevskis-todo.herokuapp.com/register",{
             method: "POST",
             headers: {
               'Content-Type': 'application/json'

@@ -38,7 +38,7 @@ const Main = (props) => {
       username: username,
     };
 
-      fetch("http://52.28.57.216/todo", {
+      fetch("https://gkarcevskis-todo.herokuapp.com/todo", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

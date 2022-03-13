@@ -37,7 +37,7 @@ const Tasks = (props) => {
     }
 
     try{
-      fetch("http://52.28.57.216/delete", {
+      fetch("https://gkarcevskis-todo.herokuapp.com/delete", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -34,7 +34,7 @@ const Project = (props) => {
             projectId: props.id
         }
     
-        fetch("http://52.28.57.216/projectDelete", {
+        fetch("https://gkarcevskis-todo.herokuapp.com/projectDelete", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

@@ -67,7 +67,7 @@ const ProjectTodos = (props) => {
             id
         }
 
-        fetch("http://52.28.57.216/projectTodos", {
+        fetch("https://gkarcevskis-todo.herokuapp.com/projectTodos", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -94,7 +94,7 @@ const ProjectTodos = (props) => {
             todoId: e.target.parentNode.dataset.key
         }
 
-        fetch("http://52.28.57.216/delete", {
+        fetch("https://gkarcevskis-todo.herokuapp.com/delete", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

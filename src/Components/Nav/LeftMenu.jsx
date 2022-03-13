@@ -160,7 +160,7 @@ const LeftMenu = (props) => {
         input: e.target.value
       }
 
-      fetch("http://52.28.57.216/search", {
+      fetch("https://gkarcevskis-todo.herokuapp.com/search", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -212,7 +212,7 @@ const LeftMenu = (props) => {
         todoId: modalData.id,
         projectId: modalData.projectId
       }
-      fetch("http://52.28.57.216/delete", {
+      fetch("https://gkarcevskis-todo.herokuapp.com/delete", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

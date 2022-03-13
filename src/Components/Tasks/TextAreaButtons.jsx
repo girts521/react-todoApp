@@ -99,7 +99,7 @@ const TextAreaButtons = (props) => {
       projectId: id
     }
 
-    fetch("http://52.28.57.216/findProject", {
+    fetch("https://gkarcevskis-todo.herokuapp.com/findProject", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -128,7 +128,7 @@ const TextAreaButtons = (props) => {
         username,
       };
 
-      fetch("http://52.28.57.216/projects", {
+      fetch("https://gkarcevskis-todo.herokuapp.com/projects", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -47,7 +47,7 @@ useEffect(() => {
         username
     }
     
-     fetch("http://localhost:3002/completed",{
+     fetch("http://52.28.57.216/completed",{
         method: "POST",
         headers: {
                   "Content-Type": "application/json",
@@ -71,7 +71,7 @@ const deleteTodo = (e) => {
       username: localStorage.getItem('name'),
       todoId: e.target.parentNode.dataset.key
     }
-      fetch("http://localhost:3002/deleteCompleted", {
+      fetch("http://52.28.57.216/deleteCompleted", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -92,7 +92,7 @@ const deleteTodo = (e) => {
         todoId: e.target.parentNode.dataset.key
       }
 
-      fetch("http://localhost:3002/restore", {
+      fetch("http://52.28.57.216/restore", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

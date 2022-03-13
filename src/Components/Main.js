@@ -38,7 +38,7 @@ const Main = (props) => {
       username: username,
     };
 
-      fetch("http://localhost:3002/todo", {
+      fetch("http://52.28.57.216/todo", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

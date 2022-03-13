@@ -38,7 +38,7 @@ const Projects = () => {
             projectName: inputValue
         }
 
-        fetch("http://localhost:3002/projectAdd", {
+        fetch("http://52.28.57.216/projectAdd", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -63,7 +63,7 @@ const Projects = () => {
             username
         }
 
-        fetch("http://localhost:3002/projects", {
+        fetch("http://52.28.57.216/projects", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

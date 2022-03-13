@@ -67,7 +67,7 @@ const ProjectTodos = (props) => {
             id
         }
 
-        fetch("http://localhost:3002/projectTodos", {
+        fetch("http://52.28.57.216/projectTodos", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -94,7 +94,7 @@ const ProjectTodos = (props) => {
             todoId: e.target.parentNode.dataset.key
         }
 
-        fetch("http://localhost:3002/delete", {
+        fetch("http://52.28.57.216/delete", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

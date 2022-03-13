@@ -37,7 +37,7 @@ const Tasks = (props) => {
     }
 
     try{
-      fetch("http://localhost:3002/delete", {
+      fetch("http://52.28.57.216/delete", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

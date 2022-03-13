@@ -34,7 +34,7 @@ const Project = (props) => {
             projectId: props.id
         }
     
-        fetch("http://localhost:3002/projectDelete", {
+        fetch("http://52.28.57.216/projectDelete", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

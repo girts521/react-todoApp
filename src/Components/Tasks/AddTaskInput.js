@@ -67,7 +67,7 @@ const AddTaskInput = (props) => {
     if(inputValue){
 
     try{
-      fetch("http://localhost:3002/add", {
+      fetch("http://52.28.57.216/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

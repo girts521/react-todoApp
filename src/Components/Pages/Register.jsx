@@ -8,7 +8,7 @@ import AuthContext from "../../store/authContext";
 const Container = styled.div`
   background-color: #1f1f1f;
   color: rgba(255, 255, 255, 0.87);
-  height: 100vh;
+  height: 70vh;
 
   display: flex;
   flex-direction: column;
@@ -104,7 +104,7 @@ const Register = (props) => {
           const dbData = {
             username: data.email
           }
-          fetch("http://localhost:3002/register",{
+          fetch("http://52.28.57.216/register",{
             method: "POST",
             headers: {
               'Content-Type': 'application/json'

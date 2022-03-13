@@ -160,7 +160,7 @@ const LeftMenu = (props) => {
         input: e.target.value
       }
 
-      fetch("http://localhost:3002/search", {
+      fetch("http://52.28.57.216/search", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -212,7 +212,7 @@ const LeftMenu = (props) => {
         todoId: modalData.id,
         projectId: modalData.projectId
       }
-      fetch("http://localhost:3002/delete", {
+      fetch("http://52.28.57.216/delete", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

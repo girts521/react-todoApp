@@ -99,7 +99,7 @@ const TextAreaButtons = (props) => {
       projectId: id
     }
 
-    fetch("http://localhost:3002/findProject", {
+    fetch("http://52.28.57.216/findProject", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -128,7 +128,7 @@ const TextAreaButtons = (props) => {
         username,
       };
 
-      fetch("http://localhost:3002/projects", {
+      fetch("http://52.28.57.216/projects", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
